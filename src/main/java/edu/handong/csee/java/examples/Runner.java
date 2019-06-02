@@ -1,5 +1,7 @@
 package edu.handong.csee.java.examples;
 
+import java.io.File;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -12,7 +14,8 @@ public class Runner {
 	String path;
 	boolean verbose;
 	boolean help;
-
+	boolean fullpath;
+	
 	public static void main(String[] args) {
 
 		Runner myRunner = new Runner();
@@ -27,6 +30,16 @@ public class Runner {
 			if (help){
 				printHelp(options);
 				return;
+			}
+			
+			if(fullpath){
+				File file1=new File(path);
+				
+				for(File file:file1.listFiles())
+				{
+					System.out.println(file.getName());
+					System.out.println(file.getAbsolutePath());
+				}
 			}
 			
 			// path is required (necessary) data so no need to have a branch.
@@ -53,6 +66,7 @@ public class Runner {
 			path = cmd.getOptionValue("p");
 			verbose = cmd.hasOption("v");
 			help = cmd.hasOption("h");
+			fullpath = cmd.hasOption("f");
 
 		} catch (Exception e) {
 			printHelp(options);
@@ -86,6 +100,12 @@ public class Runner {
 		options.addOption(Option.builder("h").longOpt("help")
 		        .desc("Help")
 		        .build());
+		
+		options.addOption(Option.builder("f").longOpt("fullpath")
+				.desc("full path print")
+				.argName("")
+				.hasArg()
+				.build());
 
 		return options;
 	}
