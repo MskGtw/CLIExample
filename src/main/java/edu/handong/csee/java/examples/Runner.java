@@ -14,7 +14,7 @@ public class Runner {
 	String path;
 	boolean verbose;
 	boolean help;
-	boolean fullpath;
+	boolean fullpath = false;
 	
 	public static void main(String[] args) {
 
@@ -103,7 +103,6 @@ public class Runner {
 		
 		options.addOption(Option.builder("f").longOpt("fullpath")
 				.desc("full path print")
-				.argName("")
 				.hasArg()
 				.build());
 
