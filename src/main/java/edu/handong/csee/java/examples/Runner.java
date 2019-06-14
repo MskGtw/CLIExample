@@ -102,6 +102,7 @@ public class Runner {
 		        .build());
 		
 		options.addOption(Option.builder("f").longOpt("fullpath")
+				.argName("")
 				.desc("full path print")
 				.hasArg()
 				.build());
